@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <sstream>
 
 using namespace std;
 
@@ -27,24 +28,27 @@ int main ()
         
         if (input_acc != acc1) {
 
+           
             cout << "Account not found";
-            system("cls");
+             system("cls");
         }
     } while (input_acc != acc1);
     
-
-    do
-    {
-        cout << "Enter your Pasword: ";
+     system("cls");
+        cout << "Please enter your Pasword: ";
         cin >> input_pass;
 
-        if (input_pass != pass1) {
+    if (input_pass != pass1)
+    {
+        do
+        { system("cls");
+            cout << "Please try again. enter your password:  ";
+            cin >> input_pass;
+        } while (input_pass != pass1);
         
-            cout << "Please try again: ";
+    }
 
-        }
-    } while (input_pass != pass1);
-    system("cls");
+    
     int choice;
     char again;
 
@@ -62,17 +66,18 @@ int main ()
     case 1:{
 
         float withdraw;
+
+        do
+        {
         cout << " You currently have " << balance << " how much do you want to withdraw? ";
         cin >> withdraw;
-
-        if (withdraw > balance)
-        {
-            cout << "Insufficient Funds!" << endl;
-        } else {
-            balance -= withdraw;
-            cout << "Withdraw sucessful. Total Balance is " << balance << endl;
-        }
+        cout << "Insufficient Funds, Try Again. " << endl;
+        } while (withdraw > balance);
+        balance-= withdraw;
+        cout << "Withdraw sucessful. Total Balance is " << balance << endl;
         
+
+
         break;
     }
 
@@ -103,8 +108,8 @@ int main ()
             cout << "Insufficient Funds!";
         } else {
             balance -= transfer;
-            cout << "Transfer Complete to" << acc2;
-            cout << "Your current balance now is: " << balance; 
+            cout << "Transfer Complete to " << acc2 << endl;
+            cout << "Your current balance now is: " << balance << endl;
             
         }
          break;
@@ -138,5 +143,5 @@ int main ()
     system("cls");
 
     while (choice !=4 && (again == 'Y' || again == 'y'));
-    
 }
+
