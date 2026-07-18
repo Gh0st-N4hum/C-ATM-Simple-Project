@@ -46,6 +46,7 @@ int main ()
     } while (input_pass != pass1);
     system("cls");
     int choice;
+    char again;
 
     cout << "Select the following you want to do: " << endl;
     cout << "[1] Withdraw Money " << endl;
@@ -109,9 +110,33 @@ int main ()
          break;
     }
 
+    case 3:{
+
+        cout << "Your current balance is : ";
+        break;
+     }
+    
+
+    case 4: {
+
+        cout << "Thanks for using my ATM!";
+        break;
+    }
+
+
     default:
+        cout << "Invalid option please try again.";
         break;
     
-    
 }
+    if (choice != '4')
+    {
+        cout << "Do you want to proceed to new transacation? Y/N";
+        cin >> again;
+    }
+    
+    system("cls");
+
+    while (choice !=4 && (again == 'Y' || again == 'y'));
+    
 }
