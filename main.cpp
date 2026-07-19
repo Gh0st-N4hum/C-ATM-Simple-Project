@@ -17,24 +17,27 @@ int main ()
     string input_acc;
     string input_pass;
 
-    do
-    {
+
+    
+    cout << endl;
         cout << "***************************"<<endl;
         cout << "**N4HUM ATM SIMPLE PROJECT**"<<endl;
         cout << "***************************"<<endl;
-        cout << "\n\n\n\n";
+        cout << "\n\n";
         cout << "Enter your Account Name: ";
         cin >> input_acc;
+    do
+    {   
         
         if (input_acc != acc1) {
-
-           
-            cout << "Account not found";
-             system("cls");
+            
+            cout << "\n\nAccount not found. Please try again. ";
+            cin >> input_acc;
         }
+
     } while (input_acc != acc1);
-    
-     system("cls");
+
+    system("cls");
         cout << "Please enter your Pasword: ";
         cin >> input_pass;
 
@@ -44,13 +47,20 @@ int main ()
         { system("cls");
             cout << "Please try again. enter your password:  ";
             cin >> input_pass;
-        } while (input_pass != pass1);
-        
+        } while (input_pass != pass1);   
     }
 
     
     int choice;
     char again;
+
+
+
+    
+    do
+    {
+
+    
 
     cout << "Select the following you want to do: " << endl;
     cout << "[1] Withdraw Money " << endl;
@@ -71,13 +81,13 @@ int main ()
         {
         cout << " You currently have " << balance << " how much do you want to withdraw? ";
         cin >> withdraw;
+
+        if(withdraw > balance)
         cout << "Insufficient Funds, Try Again. " << endl;
+
         } while (withdraw > balance);
         balance-= withdraw;
         cout << "Withdraw sucessful. Total Balance is " << balance << endl;
-        
-
-
         break;
     }
 
@@ -85,7 +95,6 @@ int main ()
         string acc2;
         float transfer;
         
-
         do
         {
              cout << "Enter the transfer acccount: ";
@@ -110,7 +119,6 @@ int main ()
             balance -= transfer;
             cout << "Transfer Complete to " << acc2 << endl;
             cout << "Your current balance now is: " << balance << endl;
-            
         }
          break;
     }
@@ -134,7 +142,7 @@ int main ()
         break;
     
 }
-    if (choice != '4')
+     if (choice != 4)
     {
         cout << "Do you want to proceed to new transacation? Y/N";
         cin >> again;
@@ -142,6 +150,8 @@ int main ()
     
     system("cls");
 
-    while (choice !=4 && (again == 'Y' || again == 'y'));
+}   while (choice !=4 && (again == 'Y' || again == 'y'));
+
+    return 0;
 }
 
