@@ -17,7 +17,8 @@ int main ()
     string input_acc;
     string input_pass;
 
-
+do
+{
     
     cout << endl;
         cout << "***************************"<<endl;
@@ -50,16 +51,11 @@ int main ()
         } while (input_pass != pass1);   
     }
 
-    
+
+do
+{
     int choice;
     char again;
-
-
-
-    
-    do
-    {
-
     
 
     cout << "Select the following you want to do: " << endl;
@@ -70,6 +66,21 @@ int main ()
 
     cin >> choice;
 
+    if (cin.fail())
+
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input. Please enter a number 1-4." << endl;
+        choice = 0;
+    }
+    else if (choice <1 || choice > 4)
+    {
+        cout << "Please enter a valid option (1-4)." << endl;
+    }
+
+  } while (choice < 1 || choice > 4);
+  
 
     switch (choice){
     
@@ -132,6 +143,7 @@ int main ()
 
     case 4: {
 
+
         cout << "Thanks for using my ATM!";
         break;
     }
@@ -141,7 +153,9 @@ int main ()
         cout << "Invalid option please try again.";
         break;
     
-}
+}   
+
+    
      if (choice != 4)
     {
         cout << "Do you want to proceed to new transacation? Y/N";
