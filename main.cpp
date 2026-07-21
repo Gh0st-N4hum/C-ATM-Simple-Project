@@ -3,11 +3,13 @@
 #include <stdlib.h>
 #include <sstream>
 #include <limits>
+#include <cctype>
 
 using namespace std;
 
 const string acc1 = "Jason";
 const string pass1 = "404";
+const string acc2 = "Mark";
 float balance = 1000.00;
 int choice;
 char again;
@@ -17,6 +19,7 @@ int main()
 
     string input_acc;
     string input_pass;
+    string input_acc2;
 
     cout << endl;
     cout << "***************************" << endl;
@@ -103,7 +106,7 @@ int main()
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     system("cls");
-                    cout << "Invalid input. Please enter a number. \n";
+                    cout << "Invalid input. Please enter proper withdrawal amount. \n";
                     withdraw = 0;
                 }
                 else
@@ -130,34 +133,56 @@ int main()
 
         case 2:
         {
-            string acc2;
+
             float transfer;
 
             do
             {
-                cout << "Enter the transfer acccount: ";
-                cin >> acc2;
-                system("cls");
-                if (acc2 != "Mark")
+                cout << "\n Enter the account name to transfer: ";
+                cin >> input_acc2;
+
+                if (input_acc2 != acc2)
                 {
-                    cout << "Account not found" << endl;
+                    cout << "\n\n Account not found. Please enter again: ";
+                    cin >> input_acc2;
                 }
 
-            } while (acc2 != "Mark");
+            } while (input_acc2 != acc2);
 
-            cout << "Enter the transfer balance: ";
-            cin >> transfer;
+            system("cls");
 
-            if (transfer > balance)
+            do
             {
-                cout << "Insufficient Funds!";
-            }
-            else
-            {
-                balance -= transfer;
-                cout << "Transfer Complete to " << acc2 << endl;
-                cout << "Your current balance now is: " << balance << endl;
-            }
+                cout << "\n\nEnter the transfering amount: ";
+                cin >> transfer;
+
+                if (cin.fail())
+                {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    system("cls");
+                    cout << "\ninvalid input. Please enter the proper amount: ";
+                    transfer = 0;
+                }
+                else
+                {
+
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                    if (transfer <= 0)
+                    {
+                        cout << "\n Insufficient amount. Please try again: ";
+                    }
+                    else if (transfer > balance)
+                    {
+                        cout << "\n Invalid amount. Please try again: ";
+                    }
+                }
+
+            } while (transfer <= 0 || transfer > balance);
+
+            balance -= transfer;
+            cout << "\n Amount of " << transfer << " has been transferred successfully to " << acc2 << endl;
             break;
         }
 
@@ -189,6 +214,6 @@ int main()
 
     } while (choice != 4 && (again == 'Y' || again == 'y'));
 
-    cout << "ATM shutting down...";
+    cout << "\n ATM shutting down...";
     return 0;
 }
