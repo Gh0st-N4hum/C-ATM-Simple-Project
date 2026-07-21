@@ -2,36 +2,35 @@
 #include <string>
 #include <stdlib.h>
 #include <sstream>
+#include <limits>
 
 using namespace std;
 
-    const string acc1 = "Jason";
-    const string pass1 = "404";
-    float balance = 1000.00;
-    
+const string acc1 = "Jason";
+const string pass1 = "404";
+float balance = 1000.00;
+int choice;
+char again;
 
-int main () 
+int main()
 {
-
 
     string input_acc;
     string input_pass;
 
-do
-{
-    
     cout << endl;
-        cout << "***************************"<<endl;
-        cout << "**N4HUM ATM SIMPLE PROJECT**"<<endl;
-        cout << "***************************"<<endl;
-        cout << "\n\n";
-        cout << "Enter your Account Name: ";
-        cin >> input_acc;
+    cout << "***************************" << endl;
+    cout << "**N4HUM ATM SIMPLE PROJECT**" << endl;
+    cout << "***************************" << endl;
+    cout << "\n\n";
+    cout << "Enter your Account Name: ";
+    cin >> input_acc;
     do
-    {   
-        
-        if (input_acc != acc1) {
-            
+    {
+
+        if (input_acc != acc1)
+        {
+
             cout << "\n\nAccount not found. Please try again. ";
             cin >> input_acc;
         }
@@ -39,133 +38,157 @@ do
     } while (input_acc != acc1);
 
     system("cls");
-        cout << "Please enter your Pasword: ";
-        cin >> input_pass;
+    cout << "Please enter your Pasword: ";
+    cin >> input_pass;
+    system("cls");
 
     if (input_pass != pass1)
     {
         do
-        { system("cls");
+        {
+            system("cls");
             cout << "Please try again. enter your password:  ";
             cin >> input_pass;
-        } while (input_pass != pass1);   
+        } while (input_pass != pass1);
     }
 
-
-do
-{
-    int choice;
-    char again;
-    
-
-    cout << "Select the following you want to do: " << endl;
-    cout << "[1] Withdraw Money " << endl;
-    cout << "[2] Transfer Money " << endl;
-    cout << "[3] Check Balance  " << endl;
-    cout << "[4] Exit " << endl;
-
-    cin >> choice;
-
-    if (cin.fail())
-
+    do
     {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid input. Please enter a number 1-4." << endl;
-        choice = 0;
-    }
-    else if (choice <1 || choice > 4)
-    {
-        cout << "Please enter a valid option (1-4)." << endl;
-    }
-
-  } while (choice < 1 || choice > 4);
-  
-
-    switch (choice){
-    
-    case 1:{
-
-        float withdraw;
-
         do
         {
-        cout << " You currently have " << balance << " how much do you want to withdraw? ";
-        cin >> withdraw;
 
-        if(withdraw > balance)
-        cout << "Insufficient Funds, Try Again. " << endl;
+            cout << "Select the following you want to do: " << endl;
+            cout << "[1] Withdraw Money " << endl;
+            cout << "[2] Transfer Money " << endl;
+            cout << "[3] Check Balance  " << endl;
+            cout << "[4] Exit " << endl;
+            cout << "Enter your choice: ";
 
-        } while (withdraw > balance);
-        balance-= withdraw;
-        cout << "Withdraw sucessful. Total Balance is " << balance << endl;
-        break;
-    }
+            cin >> choice;
 
-    case 2: {
-        string acc2;
-        float transfer;
-        
-        do
+            if (cin.fail())
+
+            {
+
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                system("cls");
+                cout << "Invalid input. Choose 1-4 only. ";
+            }
+
+            else if (choice < 1 || choice > 4)
+            {
+                system("cls");
+                cout << "Please enter a valid option (1-4)." << endl;
+            }
+
+        } while (choice < 1 || choice > 4);
+
+        switch (choice)
         {
-             cout << "Enter the transfer acccount: ";
-             cin >> acc2;
-             system("cls");
-             if (acc2 != "Mark")
-             {
-                cout << "Account not found" << endl;
-             }
-             
 
-        } while (acc2 != "Mark");
-
-        cout << "Enter the transfer balance: " ;
-        cin >> transfer;
-        
-
-        if (transfer > balance)
+        case 1:
         {
-            cout << "Insufficient Funds!";
-        } else {
-            balance -= transfer;
-            cout << "Transfer Complete to " << acc2 << endl;
-            cout << "Your current balance now is: " << balance << endl;
+
+            float withdraw;
+
+            do
+            {
+
+                cout << "\nYou currently have " << balance << " How much do you want to withdraw?";
+                cin >> withdraw;
+
+                if (cin.fail())
+                {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    system("cls");
+                    cout << "Invalid input. Please enter a number. \n";
+                    withdraw = 0;
+                }
+                else
+                {
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                    if (withdraw <= 0)
+                    {
+                        cout << "\n Invalid amount. Please try again.";
+                    }
+                    else if (withdraw > balance)
+                    {
+                        cout << "\nInvalid amount. Please Try Again";
+                    }
+                }
+
+            } while (withdraw <= 0 || withdraw > balance);
+
+            balance -= withdraw;
+            cout << "You have a successful withdrawal of " << withdraw << " and a balance of " << balance << endl;
+
+            break;
         }
-         break;
-    }
 
-    case 3:{
+        case 2:
+        {
+            string acc2;
+            float transfer;
 
-        cout << "Your current balance is : ";
-        break;
-     }
-    
+            do
+            {
+                cout << "Enter the transfer acccount: ";
+                cin >> acc2;
+                system("cls");
+                if (acc2 != "Mark")
+                {
+                    cout << "Account not found" << endl;
+                }
 
-    case 4: {
+            } while (acc2 != "Mark");
 
+            cout << "Enter the transfer balance: ";
+            cin >> transfer;
 
-        cout << "Thanks for using my ATM!";
-        break;
-    }
+            if (transfer > balance)
+            {
+                cout << "Insufficient Funds!";
+            }
+            else
+            {
+                balance -= transfer;
+                cout << "Transfer Complete to " << acc2 << endl;
+                cout << "Your current balance now is: " << balance << endl;
+            }
+            break;
+        }
 
+        case 3:
+        {
 
-    default:
-        cout << "Invalid option please try again.";
-        break;
-    
-}   
+            cout << "Your current balance is : " << balance << endl;
+            break;
+        }
 
-    
-     if (choice != 4)
-    {
-        cout << "Do you want to proceed to new transacation? Y/N";
-        cin >> again;
-    }
-    
-    system("cls");
+        case 4:
+        {
 
-}   while (choice !=4 && (again == 'Y' || again == 'y'));
+            cout << "Thanks for using my ATM!";
+            break;
+        }
 
+        default:
+            cout << "Invalid option please try again.";
+            break;
+        }
+
+        if (choice != 4)
+        {
+            cout << "Do you want to proceed to new transacation? Y/N";
+            cin >> again;
+            system("cls");
+        }
+
+    } while (choice != 4 && (again == 'Y' || again == 'y'));
+
+    cout << "ATM shutting down...";
     return 0;
 }
-
